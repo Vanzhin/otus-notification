@@ -8,6 +8,6 @@ kernel:
   resource: ../src/Shared/Infrastructure/Kernel.php
   type: attribute
 
-profiles:
-  resource: ../src/Profiles/Infrastructure/Controller/
+notifications:
+  resource: ../src/Notifications/Infrastructure/Controller/
   type: attribute

@@ -1,0 +1,15 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="https://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="App\Notifications\Domain\Aggregate\Notification\Notification" table="notification_notification">
+        <id name="ulid" type="string" length="26">
+            <generator strategy="NONE"/>
+        </id>
+        <field name="message" type="string"/>
+        <field name="userUlid" column="user_ulid" type="string" length="26"/>
+        <field name="driver" type="string" enum-type="App\Notifications\Domain\Aggregate\Notification\NotificationDriver"/>
+        <field name="createdAt" type="datetime_immutable" column="created_at" nullable="false"/>
+
+    </entity>
+</doctrine-mapping>

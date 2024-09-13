@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class RequestHeadersService
 {
-    private const string USER_HEADER = 'X-User';
+    private const USER_HEADER = 'X-User';
 
     private ?string $userUlid;
 
