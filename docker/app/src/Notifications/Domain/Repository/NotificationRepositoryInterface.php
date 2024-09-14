@@ -13,4 +13,6 @@ interface NotificationRepositoryInterface
 
     public function findByFilter(NotificationFilter $filter): PaginationResult;
 
+    public function findOneByUlid(string $ulid): ?Notification;
+
 }

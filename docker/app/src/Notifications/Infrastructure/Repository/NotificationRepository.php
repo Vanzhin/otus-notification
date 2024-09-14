@@ -24,6 +24,7 @@ class NotificationRepository extends ServiceEntityRepository implements Notifica
         $this->getEntityManager()->persist($notification);
         $this->getEntityManager()->flush();
     }
+
     public function findByFilter(NotificationFilter $filter): PaginationResult
     {
         $qb = $this->createQueryBuilder('n');
@@ -44,5 +45,11 @@ class NotificationRepository extends ServiceEntityRepository implements Notifica
             $paginator->count()
         );
     }
+
+    public function findOneByUlid(string $ulid): ?Notification
+    {
+        return $this->findOneBy(['ulid' => $ulid]);
+    }
+
 
 }

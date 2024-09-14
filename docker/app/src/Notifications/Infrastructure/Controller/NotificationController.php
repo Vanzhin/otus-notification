@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Notifications\Infrastructure\Controller;
 
 use App\Notifications\Application\UseCase\Command\CreateNotification\CreateNotificationCommand;
+use App\Notifications\Application\UseCase\Query\FindNotification\FindNotificationQuery;
 use App\Notifications\Application\UseCase\Query\GetPagedNotifications\GetPagedNotificationsQuery;
 use App\Shared\Application\Command\CommandBusInterface;
 use App\Shared\Application\Query\QueryBusInterface;
@@ -49,12 +50,21 @@ class NotificationController extends AbstractController
     {
         $data = json_decode($request->getContent(), true);
         $userUlid = $data['filter']['user_ulid'] ?? null;
-        $page = (int)$request->query->get('page');
-        $limit = (int)$request->query->get('limit');
+        $page = (int)$request->query->get('page', Pager::DEFAULT_PAGE);
+        $limit = (int)$request->query->get('limit', Pager::ITEMS_PER_PAGE);
         $query = new GetPagedNotificationsQuery(Pager::fromPage($page, $limit), $userUlid,);
         $result = $this->queryBus->execute($query);
 
         return new JsonResponse($result);
+    }
+
+    #[Route('/{ulid}', name: 'get', methods: ['GET'])]
+    public function get(string $ulid): JsonResponse
+    {
+        $query = new FindNotificationQuery($ulid);
+        $result = $this->queryBus->execute($query);
+
+        return new JsonResponse($result->notification);
     }
 }
 
