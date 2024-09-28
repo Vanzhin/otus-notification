@@ -24,6 +24,7 @@ services:
     App\Shared\Application\Query\QueryHandlerInterface:
       tags:
         - { name: messenger.message_handler, bus: query.bus }
+
     App\Shared\Application\Message\MessageHandlerInterface:
       tags:
         - { name: messenger.message_handler, transport: [ external_messages ] }
