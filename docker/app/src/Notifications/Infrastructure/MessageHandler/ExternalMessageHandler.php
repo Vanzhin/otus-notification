@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Shared\Infrastructure\MessageHandler;
+namespace App\Notifications\Infrastructure\MessageHandler;
 
 
 use App\Notifications\Application\UseCase\Command\CreateNotification\CreateNotificationCommand;
-use App\Shared\Application\Message\MessageHandlerInterface;
+use App\Notifications\Domain\Message\ExternalMessage;
 use App\Shared\Application\Command\CommandBusInterface;
-use App\Shared\Domain\Message\ExternalMessage;
+use App\Shared\Application\Message\MessageHandlerInterface;
 
 final readonly class ExternalMessageHandler implements MessageHandlerInterface
 {

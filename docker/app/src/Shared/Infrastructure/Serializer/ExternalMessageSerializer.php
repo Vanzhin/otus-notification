@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Shared\Infrastructure\Serializer;
 
-use App\Shared\Domain\Message\ExternalMessage;
 use App\Shared\Domain\Message\MessageInterface;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Exception\MessageDecodingFailedException;
@@ -21,16 +20,19 @@ class ExternalMessageSerializer implements MessageSerializerInterface
     #[\Override] public function decode(array $encodedEnvelope): Envelope
     {
         try {
+            $headers = $encodedEnvelope['headers'];
             $body = $encodedEnvelope['body'];
-            $data = json_decode($body, true);
-            $message = new ExternalMessage($data['event_type'], $data['event_data']);
-//            $message = $this->serializer->deserialize($body, ExternalMessage::class, 'json');
+            $message = $this->serializer->deserialize($body, MessageInterface::class, 'json');
         } catch (\Throwable $throwable) {
             throw new MessageDecodingFailedException($throwable->getMessage());
         }
+        $stamps = [];
+        if (!empty($headers['stamps'])) {
+            $stamps = unserialize($headers['stamps']);
+        }
 
 
-        return new Envelope($message);
+        return new Envelope($message, $stamps);
     }
 
     #[\Override] public function encode(Envelope $envelope): array
