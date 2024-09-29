@@ -5,9 +5,9 @@ namespace App\Notifications\Infrastructure\MessageHandler;
 
 
 use App\Notifications\Application\UseCase\Command\CreateNotification\CreateNotificationCommand;
-use App\Notifications\Domain\Message\ExternalMessage;
 use App\Shared\Application\Command\CommandBusInterface;
 use App\Shared\Application\Message\MessageHandlerInterface;
+use App\Shared\Domain\Message\ExternalMessage;
 
 final readonly class ExternalMessageHandler implements MessageHandlerInterface
 {

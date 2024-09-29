@@ -39,7 +39,7 @@ framework:
         # sync: 'sync://'
 
         routing:
-            'App\Notifications\Domain\Message\ExternalMessage': external_messages
+            'App\Shared\Domain\Message\ExternalMessage': external_messages
         # Route your messages to the transports
         # 'App\Message\YourMessage': async
 # when@test:

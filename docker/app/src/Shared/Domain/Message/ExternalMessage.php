@@ -2,9 +2,7 @@
 declare(strict_types=1);
 
 
-namespace App\Notifications\Domain\Message;
-
-use App\Shared\Domain\Message\MessageInterface;
+namespace App\Shared\Domain\Message;
 
 readonly class ExternalMessage implements MessageInterface
 {
