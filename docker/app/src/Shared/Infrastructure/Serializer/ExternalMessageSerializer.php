@@ -21,22 +21,13 @@ class ExternalMessageSerializer implements MessageSerializerInterface
     #[\Override] public function decode(array $encodedEnvelope): Envelope
     {
         try {
-            $headers = $encodedEnvelope['headers'];
             $body = $encodedEnvelope['body'];
-//            $data = json_decode($body, true);
-////            $message = new ExternalMessage($data['event_type'], $data['event_data']);
-
             $message = $this->serializer->deserialize($body, ExternalMessage::class, 'json');
         } catch (\Throwable $throwable) {
             throw new MessageDecodingFailedException($throwable->getMessage());
         }
-        $stamps = [];
-        if (!empty($headers['stamps'])) {
-            $stamps = unserialize($headers['stamps']);
-        }
 
-
-        return new Envelope($message, $stamps);
+        return new Envelope($message);
     }
 
     #[\Override] public function encode(Envelope $envelope): array
