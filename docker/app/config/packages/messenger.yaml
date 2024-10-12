@@ -30,7 +30,7 @@ framework:
                         name: 'reports'
                         type: topic
                     queues:
-                        orders_general:
+                        reports_general:
                             binding_keys: [ '#' ]
                     auto_setup: false
         # https://symfony.com/doc/current/messenger.html#transport-configuration
