@@ -20,10 +20,19 @@ final readonly class ExternalMessageHandler implements MessageHandlerInterface
     public function __invoke(ExternalMessage $message)
     {
         $command = new CreateNotificationCommand(
-            sprintf($this->messageMap($message->getEventType()), $message->getEventData()['sum']),
-            $message->getEventData()['user_id'],
+            sprintf('Report status changed to \'%s\'', $message->getEventType()),
+            $message->getEventData()['creator_id'],
             null
         );
+        $this->commandBus->execute($command);
+
+        if (in_array($message->getEventType(), ['created', 'send_to_approve'])) {
+            $command = new CreateNotificationCommand(
+                sprintf('Report status changed to \'%s\'', $message->getEventType()),
+                $message->getEventData()['approver_id'],
+                null
+            );
+        }
         $this->commandBus->execute($command);
     }
 
