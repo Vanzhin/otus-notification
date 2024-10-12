@@ -32,8 +32,8 @@ final readonly class ExternalMessageHandler implements MessageHandlerInterface
                 $message->getEventData()['approver_id'],
                 null
             );
+            $this->commandBus->execute($command);
         }
-        $this->commandBus->execute($command);
     }
 
     private function messageMap(string $eventType): string
