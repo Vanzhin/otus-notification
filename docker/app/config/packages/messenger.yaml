@@ -27,7 +27,7 @@ framework:
                     max_delay: 0
                 options:
                     exchange:
-                        name: 'orders'
+                        name: 'reports'
                         type: topic
                     queues:
                         orders_general:
