@@ -20,14 +20,15 @@ final readonly class ExternalMessageUsersHandler
 
     public function handle(ExternalMessage $message): void
     {
-        $response = $this->profileService->getProfile($message->getEventData()['user_id']);
+        $userId = $message->getEventData()['user_id'];
+        $response = $this->profileService->getProfile($userId);
 
         if ($response->isSuccess()) {
             $profileData = $response->getData();
             $name = $profileData['name'];
             $command = new CreateNotificationCommand(
                 sprintf('Hello %s. Welcome to the service.', $name ?? 'User without name'),
-                $message->getEventData()['id'],
+                $userId,
                 null
             );
             $this->commandBus->execute($command);
