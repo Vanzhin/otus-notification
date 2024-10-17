@@ -49,7 +49,7 @@ framework:
                         name: 'users'
                         type: topic
                     queues:
-                        users_general:
+                        users_notification:
                             binding_keys: [ '#' ]
                     auto_setup: false
         # https://symfony.com/doc/current/messenger.html#transport-configuration

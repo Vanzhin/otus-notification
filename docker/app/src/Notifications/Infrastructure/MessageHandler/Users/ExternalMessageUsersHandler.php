@@ -25,9 +25,8 @@ final readonly class ExternalMessageUsersHandler
 
         if ($response->isSuccess()) {
             $profileData = $response->getData();
-            $name = $profileData['name'];
             $command = new CreateNotificationCommand(
-                sprintf('Hello %s. Welcome to the service.', $name ?? 'User without name'),
+                sprintf('Hello %s. Welcome to the service.', $profileData['name'] ?? 'User without name'),
                 $userId,
                 null
             );
