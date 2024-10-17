@@ -51,7 +51,7 @@ framework:
                     queues:
                         users_notification:
                             binding_keys: [ '#' ]
-                    auto_setup: false
+                    auto_setup: true
         # https://symfony.com/doc/current/messenger.html#transport-configuration
         # async: '%env(MESSENGER_TRANSPORT_DSN)%'
         # failed: 'doctrine://default?queue_name=failed'
