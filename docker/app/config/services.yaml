@@ -27,7 +27,7 @@ services:
 
     App\Shared\Application\Message\MessageHandlerInterface:
       tags:
-        - { name: messenger.message_handler, transport: [ external_messages ] }
+        - { name: messenger.message_handler, transport: [ external_messages, external_messages_users ] }
 
     App\Shared\Domain\Specification\SpecificationInterface:
       public: true
@@ -43,3 +43,11 @@ services:
     public: true
     resource: '../src/*/Domain/Factory'
     exclude: '../src/Shared/*'
+
+  App\Shared\Infrastructure\Api\Profile\Api:
+    arguments:
+      $config:
+        base_uri: '%env(BASE_URI_PROFILE)%'
+        headers:
+          Accept: 'application/json'
+        http_errors: false
