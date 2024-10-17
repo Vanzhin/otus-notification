@@ -47,7 +47,7 @@ framework:
                 options:
                     exchange:
                         name: 'users'
-                        type: topic
+                        type: fanout
                     queues:
                         users_notification:
                             binding_keys: [ '#' ]
