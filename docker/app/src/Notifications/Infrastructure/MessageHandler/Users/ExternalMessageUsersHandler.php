@@ -20,7 +20,7 @@ final readonly class ExternalMessageUsersHandler
 
     public function handle(ExternalMessage $message): void
     {
-        $response = $this->profileService->getProfile($message->getEventData()['id']);
+        $response = $this->profileService->getProfile($message->getEventData()['user_id']);
 
         if ($response->isSuccess()) {
             $profileData = $response->getData();
