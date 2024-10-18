@@ -47,9 +47,9 @@ framework:
                 options:
                     exchange:
                         name: 'users'
-                        type: fanout
+                        type: topic
                     queues:
-                        users_notification:
+                        users.notification:
                             binding_keys: [ '#' ]
                     auto_setup: true
         # https://symfony.com/doc/current/messenger.html#transport-configuration
